@@ -2,7 +2,7 @@
 //  RecipesTests.swift
 //  RecipesTests
 //
-//  Created by Jose Bernardo Carreno Castillo on 9/02/25.
+//  Created by Jose Carreno Castillo.
 //
 
 import Testing

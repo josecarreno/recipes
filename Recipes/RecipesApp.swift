@@ -2,7 +2,7 @@
 //  RecipesApp.swift
 //  Recipes
 //
-//  Created by Jose Bernardo Carreno Castillo on 9/02/25.
+//  Created by Jose Carreno Castillo.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct RecipesApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            HomeView()
         }
     }
 }

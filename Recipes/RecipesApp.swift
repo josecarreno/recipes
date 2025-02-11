@@ -12,6 +12,8 @@ struct RecipesApp: App {
     var body: some Scene {
         WindowGroup {
             HomeView()
+                .environment(RecipesModel(recipesService: RecipesLocalService()))
+                .environment(MapModel())
         }
     }
 }

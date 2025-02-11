@@ -13,7 +13,11 @@ enum RecipesServiceError: Error {
     case jsonDecoding
 }
 
-actor RecipesService {
+protocol RecipesService: Sendable {
+    func fetch() async throws -> [Recipe]
+}
+
+actor RecipesLocalService: RecipesService {
     func fetch() async throws -> [Recipe] {
         guard let url = Bundle.main.url(forResource: "recipes", withExtension: "json") else {
             throw RecipesServiceError.fileNotFound

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DataState<T> {
+enum DataState<T: Sendable> {
     case loading
     case error(message: String)
     case loaded(data: T)

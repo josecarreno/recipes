@@ -18,11 +18,11 @@ struct DetailView: View {
                 Image(recipe.largeImage)
                     .resizable()
                     .scaledToFit()
-                Button(action: {
+                Button {
                     isShowingMapView.toggle()
-                }, label: {
+                } label: {
                     Label(recipe.origin, systemImage: "location.circle")
-                })
+                }
                 Text("Ingredients: \(recipe.ingredients.joined(separator: ", "))")
                     .font(.headline)
                 Text(recipe.description)

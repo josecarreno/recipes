@@ -113,6 +113,44 @@ struct RecipesTests {
         model.searchText = "Pizza"
         #expect(model.filteredRecipes.count == 0, "No recipes should be shown")
     }
+
+    @MainActor
+    @Test("Recipe adding")
+    func testRecipeAdding() async throws {
+        let recipes = [recipe1, recipe2]
+        let mockService = MockRecipesService(recipes: recipes, error: nil)
+
+        let model = RecipesModel(recipesService: mockService)
+        await model.fetchRecipes()
+
+        let originalRecipes = try #require(model.recipes.value)
+        #expect(originalRecipes.count == 2, "Incorrect recipes count")
+
+        model.addRecipe(recipe: recipe3)
+
+        let modifiedRecipes = try #require(model.recipes.value)
+        #expect(modifiedRecipes.count == 3, "Incorrect recipes count after adding a new one")
+        #expect(modifiedRecipes[2].name == "Pasta", "Name should be Pasta")
+    }
+
+    @MainActor
+    @Test("Recipe removing")
+    func testRecipeRemoving() async throws {
+        let recipes = [recipe1, recipe2, recipe3]
+        let mockService = MockRecipesService(recipes: recipes, error: nil)
+
+        let model = RecipesModel(recipesService: mockService)
+        await model.fetchRecipes()
+
+        let originalRecipes = try #require(model.recipes.value)
+        #expect(originalRecipes.count == 3, "Incorrect recipes count")
+
+        model.removeRecipe(id: recipe2.id)
+
+        let modifiedRecipes = try #require(model.recipes.value)
+        #expect(modifiedRecipes.count == 2, "Incorrect recipes count after removing one")
+        #expect(modifiedRecipes[1].name == "Pasta", "Name should be Pasta")
+    }
 }
 
 

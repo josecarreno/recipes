@@ -1,5 +1,5 @@
 //
-//  MapView.swift
+//  OriginMapView.swift
 //  Recipes
 //
 //  Created by Jose Carreno Castillo.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct MapView: View {
+struct OriginMapView: View {
     let title: String
     let origin: String
 
@@ -38,6 +38,6 @@ struct MapView: View {
 }
 
 #Preview {
-    MapView(title: "Paella origin location", origin: "Valencia, Spain")
+    OriginMapView(title: "Paella origin location", origin: "Valencia, Spain")
         .environment(MapModel())
 }

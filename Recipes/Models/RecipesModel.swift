@@ -44,6 +44,22 @@ class RecipesModel {
             recipes = .error(message: "Error fetching recipes")
         }
     }
+
+    func removeRecipe(id: String) {
+        guard var data = recipes.value else { return }
+
+        data.removeAll(where: { $0.id == id})
+
+        recipes = .loaded(data: data)
+    }
+
+    func addRecipe(recipe: Recipe) {
+        guard var data = recipes.value else { return }
+
+        data.append(recipe)
+
+        recipes = .loaded(data: data)
+    }
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  DetailView.swift
+//  RecipeDetailView.swift
 //  Recipes
 //
 //  Created by Jose Carreno Castillo.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailView: View {
+struct RecipeDetailView: View {
     let recipe: Recipe
 
     @State var isShowingMapView = false
@@ -18,6 +18,7 @@ struct DetailView: View {
                 Image(recipe.largeImage)
                     .resizable()
                     .scaledToFit()
+                    .background(.gray)
                 Button {
                     isShowingMapView.toggle()
                 } label: {
@@ -32,7 +33,7 @@ struct DetailView: View {
         }
         .navigationTitle(recipe.name)
         .sheet(isPresented: $isShowingMapView) {
-            MapView(
+            OriginMapView(
                 title: "\(recipe.name) origin location",
                 origin: recipe.origin
             )
@@ -41,7 +42,7 @@ struct DetailView: View {
 }
 
 #Preview {
-    DetailView(recipe: Recipe(
+    RecipeDetailView(recipe: Recipe(
         id: "1",
         name: "Paella",
         description: "Delicious Spanish rice dish",

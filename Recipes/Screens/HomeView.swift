@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment(RecipesModel.self) var model
+    @State private var isAddRecipeViewPresented = false
 
     var body: some View {
         NavigationView {
@@ -19,10 +20,10 @@ struct HomeView: View {
                 case .error(let message):
                     Label(message, systemImage: "exclamationmark.triangle.fill")
                 case .loaded:
-                    @Bindable var model = model
+                    @Bindable var bindingModel = model
 
                     List(model.filteredRecipes) { recipe in
-                        NavigationLink(destination: DetailView(recipe: recipe)) {
+                        NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                             HStack {
                                 Image(recipe.smallImage, bundle: .main)
                                     .resizable()
@@ -32,15 +33,32 @@ struct HomeView: View {
                                     .cornerRadius(8)
                                 Text(recipe.name)
                             }
+                            .swipeActions {
+                                Button(role: .destructive) {
+                                    model.removeRecipe(id: recipe.id)
+                                } label: {
+                                    Label("Delete", systemImage: "trash.fill")
+                                }
+                            }
                         }
                     }
-                    .searchable(text: $model.searchText)
+                    .searchable(text: $bindingModel.searchText)
                 }
             }
             .navigationTitle("Recipes")
-            .task {
-                await model.fetchRecipes()
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Add recipe", systemImage: "plus") {
+                        isAddRecipeViewPresented = true
+                    }
+                }
             }
+        }
+        .sheet(isPresented: $isAddRecipeViewPresented) {
+            AddRecipeView()
+        }
+        .task {
+            await model.fetchRecipes()
         }
     }
 }
@@ -48,4 +66,5 @@ struct HomeView: View {
 #Preview {
     HomeView()
         .environment(RecipesModel(recipesService: RecipesLocalService()))
+        .environment(MapModel())
 }

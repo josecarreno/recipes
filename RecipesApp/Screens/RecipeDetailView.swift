@@ -15,17 +15,18 @@ struct RecipeDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 10) {
-                Image(recipe.largeImage)
-                    .resizable()
-                    .scaledToFit()
-                    .background(.gray)
+                ImageDisplay(details: recipe.largeImage)
+                    .frame(maxWidth: .infinity)
+
                 Button {
                     isShowingMapView.toggle()
                 } label: {
                     Label(recipe.origin, systemImage: "location.circle")
                 }
+
                 Text("Ingredients: \(recipe.ingredients.joined(separator: ", "))")
                     .font(.headline)
+
                 Text(recipe.description)
                     .font(.body)
             }
@@ -46,8 +47,8 @@ struct RecipeDetailView: View {
         id: "1",
         name: "Paella",
         description: "Delicious Spanish rice dish",
-        smallImage: "paella_small",
-        largeImage: "paella_large",
+        smallImage: ImageDetails(source: "paella_small", type: .asset),
+        largeImage: ImageDetails(source: "paella_large", type: .asset),
         ingredients: ["Rice", "Seafood", "Chicken"],
         origin: "Valencia, Spain")
     )

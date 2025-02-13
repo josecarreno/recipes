@@ -25,11 +25,8 @@ struct HomeView: View {
                     List(model.filteredRecipes) { recipe in
                         NavigationLink(destination: RecipeDetailView(recipe: recipe)) {
                             HStack {
-                                Image(recipe.smallImage, bundle: .main)
-                                    .resizable()
-                                    .scaledToFit()
+                                ImageDisplay(details: recipe.smallImage)
                                     .frame(width: 50, height: 50)
-                                    .background(.gray)
                                     .cornerRadius(8)
                                 Text(recipe.name)
                             }

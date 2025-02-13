@@ -34,8 +34,8 @@ struct AddRecipeView: View {
                     id: UUID().uuidString,
                     name: name,
                     description: description,
-                    smallImage: "",
-                    largeImage: "",
+                    smallImage: .empty,
+                    largeImage: .empty,
                     ingredients: [],
                     origin: origin
                 )

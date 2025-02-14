@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct RecipesResponse: Decodable {
+    let recipes: [Recipe]
+}
+
 struct Recipe: Identifiable, Decodable {
     let id: String
     let name: String

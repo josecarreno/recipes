@@ -22,7 +22,7 @@ struct AddRecipeView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 24) {
             Form {
-                Section("Basic information") {
+                Section("Basic recipe information") {
                     TextField("Name", text: $name)
                     TextField("Description", text: $description)
                     TextField("Origin", text: $origin)

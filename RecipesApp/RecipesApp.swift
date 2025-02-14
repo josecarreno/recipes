@@ -9,10 +9,16 @@ import SwiftUI
 
 @main
 struct RecipesApp: App {
+    let source = DataSource.local
+
     var body: some Scene {
         WindowGroup {
             HomeView()
-                .environment(RecipesModel(recipesService: RecipesLocalService()))
+                .environment(
+                    RecipesModel(
+                        recipesService: RecipesServiceLocator.find(source: source)
+                    )
+                )
                 .environment(MapModel())
         }
     }
